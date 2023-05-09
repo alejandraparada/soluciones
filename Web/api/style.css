@@ -1,0 +1,14 @@
+html, 
+body, 
+#myTableNode {
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+}
+
+#top, 
+#bot {
+    margin: 0;
+    padding: 0;
+}
