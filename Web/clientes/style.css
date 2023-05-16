@@ -11,9 +11,13 @@ html, body, #map{
       border-radius: 5px;
       background-color: #f2f2f2b4;
       padding: 20px;
+      column-count:2;
+      column-gap: 3em;
+      column-rule: 1px solid #bbb;
+      column-width: 140px;
   }
   input[type=text], input[type=password], select {
-      width: 80%;
+      width: 100%;
       padding: 4px 20px;
       margin: 4px 0;
       display: inline-block;
@@ -22,7 +26,7 @@ html, body, #map{
       box-sizing: border-box;
   }
   input[type=submit], button {
-      width: 25%;
+      width: 100%;
       background-color: #4CAF50;
       color: white;
       padding: 4px 20px;
