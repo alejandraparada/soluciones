@@ -99,24 +99,24 @@ require([
               else{
                 input.setAttribute("type", "text");
               }
-              if(field.name.includes("Nombre")){
-                input.setAttribute("value", `Carla`);
-              }
-              if(field.name.includes("URL")){
-                input.setAttribute("value", `https://carla`);
-              }
-              if(field.name.includes("Usuario")){
-                input.setAttribute("value", `caparada`);
-              }
-              if(field.name.includes("Password")){
-                input.setAttribute("value", `carlapa123`);
-              }
-              if(field.name.includes("Codigo")){
-                input.setAttribute("value", `28805`);
-              }
-              if(field.name.includes("Provincia")){
-                input.setAttribute("value", `Madrid`);
-              }
+              // if(field.name.includes("Nombre")){
+              //   input.setAttribute("value", `Carla`);
+              // }
+              // if(field.name.includes("URL")){
+              //   input.setAttribute("value", `https://carla`);
+              // }
+              // if(field.name.includes("Usuario")){
+              //   input.setAttribute("value", `caparada`);
+              // }
+              // if(field.name.includes("Password")){
+              //   input.setAttribute("value", `carlapa123`);
+              // }
+              // if(field.name.includes("Codigo")){
+              //   input.setAttribute("value", `28805`);
+              // }
+              // if(field.name.includes("Provincia")){
+              //   input.setAttribute("value", `Madrid`);
+              // }
               button.parentNode.insertBefore(input, button);
             }
           });
