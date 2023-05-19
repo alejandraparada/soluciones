@@ -159,7 +159,6 @@ require([
               console.error("Error al eliminar cliente: ", error);
             });
 
-            // myFeatureLayer.applyEdits(null,[updates], null);
             myFeatureTable.refresh();
           });
 
@@ -167,6 +166,14 @@ require([
           let buttonRefresh = document.getElementById("refreshTableButton");
           buttonRefresh.addEventListener("click", (evt) => {
             myFeatureTable.refresh();
+          });
+
+          //Limpiar Campos del Formulario
+          let buttonClear = document.getElementById("clearFormButton");
+          buttonClear.addEventListener("click", (evt) => {
+            myFeatureTable.featureLayer.fields.forEach(field => {
+              document.getElementById(field.name).value = ''
+            });
           });
 
         });
