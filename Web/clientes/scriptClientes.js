@@ -40,6 +40,7 @@ require([
         myFeatureTable.on("load", function(evt){
           //Dar de alta nuevo cliente - añadir cliente
           let button = document.getElementById("addCustomerButton");
+          let pivote = document.getElementById("pivot");
           button.addEventListener("click", (evt) => {
 
             let adds = {
@@ -48,7 +49,7 @@ require([
             };
             //Obtener Elementos input del formulario por el nombre de la clase  
             let inputs = document.getElementsByClassName("form_field");
-            for(let i = 0; i < inputs.length; i++){
+            for(let i = 1; i < inputs.length; i++){
               console.log("inputsLength",inputs.length)
               if(inputs[i].type != "submit"){
                 if(inputs[i].value == null || inputs[i].value === ""){
@@ -99,7 +100,7 @@ require([
             if(field.name.includes("Provincia")){
               input.setAttribute("value", `Madrid`);
             }
-            button.parentNode.insertBefore(input, button);
+            pivote.parentNode.insertBefore(input, pivote);
             
           });
 
@@ -129,7 +130,42 @@ require([
               console.error("Error al aplicar la edición: ", error);
             });
 
+            myFeatureTable.refresh();
+          });
+
+          //Elimminar cliente existente
+          let buttonDelete = document.getElementById("deleteCustomerButton");
+          buttonDelete.addEventListener("click", (evt) => {
+
+            let deletes = {
+              attributes: {},
+              geometry: null
+            };
+              
+            let inputs = document.getElementsByClassName("form_field");
+            for(let i = 0; i < inputs.length; i++){
+              if(inputs[i].type != "submit"){
+                if(inputs[i].value == null || inputs[i].value === ""){
+                    alert("Es necesario que rellenes todos los campos");
+                    return;
+                }
+                deletes.attributes[inputs[i].alt] = inputs[i].value;
+              }
+            }
+
+            myFeatureTable.featureLayer.applyEdits(null, null, [deletes], function(addResults, updateResults, deleteResults) {
+              console.log("Cliente eliminado correctamente");
+            }, function(error) {
+              console.error("Error al eliminar cliente: ", error);
+            });
+
             // myFeatureLayer.applyEdits(null,[updates], null);
+            myFeatureTable.refresh();
+          });
+
+          //Refresh table button
+          let buttonRefresh = document.getElementById("refreshTableButton");
+          buttonRefresh.addEventListener("click", (evt) => {
             myFeatureTable.refresh();
           });
 

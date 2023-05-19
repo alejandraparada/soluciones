@@ -18,11 +18,26 @@
 <body class="claro esri">
   <div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline'" style="width:100%; height:100%;">
     <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center', splitter:true" style="height:60%">
-        <h3>Gestión de clientes</h3>
-        <div id="form">
-            <button id="addCustomerButton" class="btn btn-primary btn-sm" type="submit" >Crear cliente</button><p class="form_expelled"></p>
-            <button id="updateCustomerButton" class="btn btn-primary btn-sm" type="submit">Modificar cliente</button><p class="form_expelled"></p>
+      <h3>Gestión de clientes</h3>
+      <div id="form">
+        <p id="pivot"></p>
+      </div>
+      <div class="container text-center">
+        <div class="row">
+          <p></p>
+          <div class="col">
+            <button id="addCustomerButton" class="btn btn-primary btn-sm" type="submit" >Crear cliente</button>
+          </div>
+          <div class="col">
+            <button id="updateCustomerButton" class="btn btn-primary btn-sm" type="submit">Modificar cliente</button>
+          </div>
+          <div class="col">
             <button id="deleteCustomerButton" class="btn btn-primary btn-sm" type="submit">Eliminar cliente</button>
+          </div>
+          <div class="col">
+            <button id="refreshTableButton" class="btn btn-primary btn-sm" type="submit">Refresh Table</button>
+          </div>
+        </div>
       </div>
     </div>
     <div id="bot" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom', splitter:true" style="height:40%">
