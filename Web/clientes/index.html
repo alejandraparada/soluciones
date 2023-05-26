@@ -16,35 +16,239 @@
 </head>
 
 <body class="claro esri">
-  <div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline'" style="width:100%; height:100%;">
-    <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center', splitter:true" style="height:60%">
-      <h3>Gestión de clientes</h3>
+  <h3>Soluciones</h3>
+  <hr>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <select id="formSelect" class="form-select" aria-label="Default select example">
+          <option value="0">Gestión de Clientes</option>
+          <option value="1">Gestión de Despliegues</option>
+          <option value="2">Gestión de Recursos</option>
+          <option value="3">Gestión de Soluciones</option>
+          <option value="4">Gestión de Webmaps</option>
+        </select>
+      </div>
+      <div class="col">
+        <button id="selectTable" class="btn btn-primary btn-sm" type="submit" >Buscar</button>
+        <p></p>
+      </div>
+    </div>
+  </div>
+  <div id="formClientes" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline'" style="width:100%; height:100%; display:block">
+    <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter:true" style="height:90%">
       <div id="form">
+        <label for="Clientes_OBJECTID" class="form-label">OBJECTID</label>
+        <input class="form_field_clientes" id="Clientes_OBJECTID" placeholder="OBJECTID" alt="OBJECTID" disabled="true" readonly="true" type="text">
+        <label for="Clientes_ID_Cliente" class="form-label">ID Cliente</label>
+        <input class="form_field_clientes" id="Clientes_ID_Cliente" placeholder="ID_Cliente" alt="ID_Cliente" type="text">
+        <label for="Clientes_Nombre" class="form-label">Nombre</label>
+        <input class="form_field_clientes" id="Clientes_Nombre" placeholder="Nombre" alt="Nombre" type="text" value="Carla">
+        <label for="Clientes_URL_Destino" class="form-label">URL Destino</label>
+        <input class="form_field_clientes" id="Clientes_URL_Destino" placeholder="URL_Destino" alt="URL_Destino" type="text" value="https://carla">
+        <label for="Clientes_Usuario_Destino" class="form-label">Usuario Destino</label>
+        <input class="form_field_clientes" id="Clientes_Usuario_Destino" placeholder="Usuario_Destino" alt="Usuario_Destino" type="text" value="caparada">
+        <label for="Clientes_Password_Destino" class="form-label">Password Destino</label>
+        <input class="form_field_clientes" id="Clientes_Password_Destino" placeholder="Password_Destino" alt="Password_Destino" type="password" value="carlapa123">
+        <label for="Clientes_Usuario_Origen" class="form-label">Usuario Origen</label>
+        <input class="form_field_clientes" id="Clientes_Usuario_Origen" placeholder="Usuario_Origen" alt="Usuario_Origen" type="text" value="caparada">
+        <label for="Clientes_Password_Origen" class="form-label">Password Origen</label>
+        <input class="form_field_clientes" id="Clientes_Password_Origen" placeholder="Password_Origen" alt="Password_Origen" type="password" value="carlapa123">
+        <label for="Clientes_Codigo_Municipio" class="form-label">Codigo Municipio</label>
+        <input class="form_field_clientes" id="Clientes_Codigo_Municipio" placeholder="Codigo_Municipio" alt="Codigo_Municipio" type="text" value="28805">
+        <label for="Clientes_Nombre_Provincia" class="form-label">Nombre Provincia</label>
+        <input class="form_field_clientes" id="Clientes_Nombre_Provincia" placeholder="Nombre_Provincia" alt="Nombre_Provincia" type="text" value="Madrid">
         <p id="pivot"></p>
       </div>
-      <div class="container text-center">
+      <div id="formButtons" class="container text-center">
         <div class="row">
           <p></p>
           <div class="col">
-            <button id="addCustomerButton" class="btn btn-primary btn-sm" type="submit" >Crear cliente</button>
+            <button id="addCustomerButton" class="btn btn-primary btn-sm" type="submit" >Añadir Cliente</button>
           </div>
           <div class="col">
-            <button id="updateCustomerButton" class="btn btn-primary btn-sm" type="submit">Modificar cliente</button>
+            <button id="updateCustomerButton" class="btn btn-primary btn-sm" type="submit">Modificar Cliente</button>
           </div>
           <div class="col">
-            <button id="deleteCustomerButton" class="btn btn-primary btn-sm" type="submit">Eliminar cliente</button>
+            <button id="deleteCustomerButton" class="btn btn-primary btn-sm" type="submit">Eliminar Cliente</button>
           </div>
           <div class="col">
-            <button id="refreshTableButton" class="btn btn-primary btn-sm" type="submit">Actualizar Tabla</button>
+            <button id="refreshTableCustomerButton" class="btn btn-primary btn-sm" type="submit">Actualizar Tabla</button>
           </div>
           <div class="col">
-            <button id="clearFormButton" class="btn btn-primary btn-sm" type="submit">Limpiar Formulario</button>
+            <button id="clearFormCustomerButton" class="btn btn-primary btn-sm" type="submit">Limpiar Formulario</button>
           </div>
         </div>
       </div>
+      <div id="bot" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom', splitter:true" style="width:100%;height:60%">
+        <div id="myTableNode"></div>
+      </div>
     </div>
-    <div id="bot" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom', splitter:true" style="height:40%">
-      <div id="myTableNode"></div>
+  </div>
+  <div id="formDespliegues" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline'" style="width:100%; height:100%; display:none">
+    <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter:true" style="height:100%">
+      <div id="form">
+        <label for="Despliegues_OBJECTID" class="form-label">OBJECTID</label>
+        <input class="form_field_despliegues" id="Despliegues_OBJECTID" placeholder="OBJECTID" alt="OBJECTID" disabled="true" readonly="true" type="text">
+        <label for="Despliegues_ID_Despliegue" class="form-label">ID Despliegue</label>
+        <input class="form_field_despliegues" id="Despliegues_ID_Despliegue" placeholder="ID_Despliegue" alt="ID_Despliegue" type="text">
+        <label for="Despliegues_ID_Cliente" class="form-label">ID Cliente</label>
+        <input class="form_field_despliegues" id="Despliegues_ID_Cliente" placeholder="ID_Cliente" alt="ID_Cliente" type="text">
+        <label for="Despliegues_ID_Solucion" class="form-label">ID Solucion</label>
+        <input class="form_field_despliegues" id="Despliegues_ID_Solucion" placeholder="ID_Solucion" alt="ID_Solucion" type="text">
+        <label for="Despliegues_Fecha_Despliegue" class="form-label">Fecha Despliegue</label>
+        <input class="form_field_despliegues" id="Despliegues_Fecha_Despliegue" placeholder="Fecha_Despliegue" alt="Fecha_Despliegue" type="text">
+        <label for="Despliegues_Fecha_Personalizacion" class="form-label">Fecha Personalizacion</label>
+        <input class="form_field_despliegues" id="Despliegues_Fecha_Personalizacion" placeholder="Fecha_Personalizacion" alt="Fecha_Personalizacion" type="text">
+        <label for="Despliegues_Fecha_Alta" class="form-label">Fecha Alta</label>
+        <input class="form_field_despliegues" id="Despliegues_Fecha_Alta" placeholder="Fecha_Alta" alt="Fecha_Alta" type="text">
+        <label for="Despliegues_Fecha_Baja" class="form-label">Fecha Baja</label>
+        <input class="form_field_despliegues" id="Despliegues_Fecha_Baja" placeholder="Fecha_Baja" alt="Fecha_Baja" type="text">
+      </div>
+      <div id="formButtons" class="container text-center">
+        <div class="row">
+          <p></p>
+          <div class="col">
+            <button id="addDeploymentButton" class="btn btn-primary btn-sm" type="submit" >Añadir Despliegue</button>
+          </div>
+          <div class="col">
+            <button id="updateDeploymentButton" class="btn btn-primary btn-sm" type="submit">Modificar Despliegue</button>
+          </div>
+          <div class="col">
+            <button id="deleteDeploymentButton" class="btn btn-primary btn-sm" type="submit">Eliminar Despliegue</button>
+          </div>
+          <div class="col">
+            <button id="refreshTableDeploymentButton" class="btn btn-primary btn-sm" type="submit">Actualizar Tabla</button>
+          </div>
+          <div class="col">
+            <button id="clearFormDeploymentButton" class="btn btn-primary btn-sm" type="submit">Limpiar Formulario</button>
+          </div>
+        </div>
+      </div>
+      <div id="bot1" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom', splitter:true" style="width:100%;height:60%">
+        <div id="myTableNode1"></div>
+      </div>
+    </div>
+  </div>
+  <div id="formRecursos" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline'" style="width:100%; height:100%; display:none">
+    <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter:true" style="height:90%">
+      <div id="form">
+        <label for="Recursos_OBJECTID" class="form-label">OBJECTID</label>
+        <input class="form_field_recursos" id="Recursos_OBJECTID" placeholder="OBJECTID" alt="OBJECTID" disabled="true" readonly="true" type="text">
+        <label for="Recursos_ID_Recurso" class="form-label">ID Recurso</label>
+        <input class="form_field_recursos" id="Recursos_ID_Recurso" placeholder="ID_Recurso" alt="ID_Recurso" type="text">
+        <label for="Recursos_ID_Solucion" class="form-label">ID Solucion</label>
+        <input class="form_field_recursos" id="Recursos_ID_Solucion" placeholder="ID_Solucion" alt="ID_Solucion" type="text">
+        <label for="Recursos_ID_Item" class="form-label">ID Item</label>
+        <input class="form_field_recursos" id="Recursos_ID_Item" placeholder="ID_Item" alt="ID_Item" type="text">
+        <label for="Recursos_Tipo" class="form-label">Recursos Tipo</label>
+        <input class="form_field_recursos" id="Recursos_Tipo" placeholder="Tipo" alt="Tipo" type="text">
+        <label for="Recursos_Nombre" class="form-label">Recursos Nombre</label>
+        <input class="form_field_recursos" id="Recursos_Nombre" placeholder="Nombre" alt="Nombre" type="text" >
+        <label for="Recursos_Requiere_Automatizacion" class="form-label">Requiere Automatizacion</label>
+        <input class="form_field_recursos" id="Recursos_Requiere_Automatizacion" placeholder="Requiere_Automatizacion" alt="Requiere_Automatizacion" type="text">
+        <label for="Recursos_Filtro_Atributo" class="form-label">Filtro Atributo</label>
+        <input class="form_field_recursos" id="Recursos_Filtro_Atributo" placeholder="Filtro_Atributo" alt="Filtro_Atributo" type="text">
+        <label for="Recursos_Path_GDB" class="form-label">Path GDB</label>
+        <input class="form_field_recursos" id="Recursos_Path_GDB" placeholder="Path_GDB" alt="Path_GDB" type="text">
+        <label for="Recursos_EsMunicipio" class="form-label">Es Municipio</label>
+        <input class="form_field_recursos" id="Recursos_EsMunicipio" placeholder="EsMunicipio" alt="EsMunicipio" type="text">
+      </div>
+      <div id="formButtons" class="container text-center">
+        <div class="row">
+          <p></p>
+          <div class="col">
+            <button id="addResourcesButton" class="btn btn-primary btn-sm" type="submit" >Añadir Recurso</button>
+          </div>
+          <div class="col">
+            <button id="updateResourcesButton" class="btn btn-primary btn-sm" type="submit">Modificar Recurso</button>
+          </div>
+          <div class="col">
+            <button id="deleteResourcesButton" class="btn btn-primary btn-sm" type="submit">Eliminar Recurso</button>
+          </div>
+          <div class="col">
+            <button id="refreshTableResourcesButton" class="btn btn-primary btn-sm" type="submit">Actualizar Tabla</button>
+          </div>
+          <div class="col">
+            <button id="clearFormResourcesButton" class="btn btn-primary btn-sm" type="submit">Limpiar Formulario</button>
+          </div>
+        </div>
+      </div>
+      <div id="bot2" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom', splitter:true" style="height:60%">
+        <div id="myTableNode2"></div>
+      </div>
+    </div>
+  </div>
+  <div id="formSoluciones" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline'" style="width:100%; height:100%; display:none">
+    <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter:true" style="height:90%">
+      <div id="form">
+        <label for="Soluciones_OBJECTID" class="form-label">OBJECTID</label>
+        <input class="form_field_soluciones" id="Soluciones_OBJECTID" placeholder="OBJECTID" alt="OBJECTID" disabled="true" readonly="true" type="text">
+        <label for="Soluciones_ID_Solucion" class="form-label">ID Solucion</label>
+        <input class="form_field_soluciones" id="Soluciones_ID_Solucion" placeholder="ID_Solucion" alt="ID_Solucion" type="text">
+        <label for="Soluciones_Version" class="form-label">Version</label>
+        <input class="form_field_soluciones" id="Soluciones_Version" placeholder="Version" alt="Version" type="text">
+        <label for="Soluciones_Nombre" class="form-label">Nombre Solucion</label>
+        <input class="form_field_soluciones" id="Soluciones_Nombre" placeholder="Nombre" alt="Nombre" type="text">
+      </div>
+      <div id="formButtons" class="container text-center">
+        <div class="row">
+          <p></p>
+          <div class="col">
+            <button id="addSolutionButton" class="btn btn-primary btn-sm" type="submit" >Añadir Solucion</button>
+          </div>
+          <div class="col">
+            <button id="updateSolutionButton" class="btn btn-primary btn-sm" type="submit">Modificar Solucion</button>
+          </div>
+          <div class="col">
+            <button id="deleteSolutionButton" class="btn btn-primary btn-sm" type="submit">Eliminar Solucion</button>
+          </div>
+          <div class="col">
+            <button id="refreshTableSolutionButton" class="btn btn-primary btn-sm" type="submit">Actualizar Tabla</button>
+          </div>
+          <div class="col">
+            <button id="clearFormSolutionButton" class="btn btn-primary btn-sm" type="submit">Limpiar Formulario</button>
+          </div>
+        </div>
+      </div>
+      <div id="bot3" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom', splitter:true" style="height:60%">
+        <div id="myTableNode3"></div>
+      </div>
+    </div>
+  </div>
+  <div id="formWebmaps" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline'" style="width:100%; height:100%; display:none">
+    <div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter:true" style="height:100%">
+      <div id="form">
+        <label for="Webmaps_OBJECTID" class="form-label">OBJECTID</label>
+        <input class="form_field_recursos" id="Webmaps_OBJECTID" placeholder="OBJECTID" alt="OBJECTID" disabled="true" readonly="true" type="text">
+        <label for="Webmaps_ID_Recurso" class="form-label">ID Recurso</label>
+        <input class="form_field_recursos" id="Webmaps_ID_Recurso" placeholder="ID_Recurso" alt="ID_Recurso" type="text">
+        <label for="Webmaps_Webmap_Nombre" class="form-label">Webmap Nombre</label>
+        <input class="form_field_recursos" id="Webmaps_Webmap_Nombre" placeholder="Webmap_Nombre" alt="Webmaps_Webmap_Nombre" type="text">
+      </div>
+      <div id="formButtons" class="container text-center">
+        <div class="row">
+          <p></p>
+          <div class="col">
+            <button id="addWebmapsButton" class="btn btn-primary btn-sm" type="submit" >Añadir Webmap</button>
+          </div>
+          <div class="col">
+            <button id="updateWebmapsButton" class="btn btn-primary btn-sm" type="submit">Modificar Webmap</button>
+          </div>
+          <div class="col">
+            <button id="deleteWebmapsButton" class="btn btn-primary btn-sm" type="submit">Eliminar Webmap</button>
+          </div>
+          <div class="col">
+            <button id="refreshTableWebmapsButton" class="btn btn-primary btn-sm" type="submit">Actualizar Tabla</button>
+          </div>
+          <div class="col">
+            <button id="clearFormWebmapsButton" class="btn btn-primary btn-sm" type="submit">Limpiar Formulario</button>
+          </div>
+        </div>
+      </div>
+      <div id="bot4" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom', splitter:true" style="height:60%">
+        <div id="myTableNode4"></div>
+      </div>
     </div>
   </div>
 </body>
