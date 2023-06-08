@@ -34,8 +34,6 @@
   <div id="formClientes" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline'" style="width:60%; height:100%; display:block">
     <div data-dojo-type="dijit/layout/ContentPane" region="center" data-dojo-props="splitter:true" style="height:90%; justify-content: center;">
       <div id="form_cli" class="form">
-        <label for="Clientes_OBJECTID" class="form-label" style="display: none;">OBJECTID</label>
-        <input class="form_field_clientes" id="Clientes_OBJECTID" placeholder="OBJECTID" alt="OBJECTID" disabled="true" readonly="true" type="text" style="display: none;">
         <label for="Clientes_Nombre" class="form-label">Nombre</label>
         <input class="form_field_clientes" id="Clientes_Nombre" placeholder="Nombre" alt="Nombre" type="text" value="Carla">
         <label for="Clientes_URL_Destino" class="form-label">URL Destino</label>
@@ -58,7 +56,7 @@
         <div class="row gap-2" style="justify-content: right;">
           <p></p>
           <!-- <div class="gap-2"> -->
-            <button id="addCustomerButton" class="btn btn-primary fs-6" type="submit" style="width: 20%; padding: 12px;" >Añadir Cliente</button>
+            <button id="addCustomerButton" class="btn btn-primary fs-6" type="submit" style="width: 20%; padding: 12px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Añadir Cliente</button>
           <!-- </div> -->
           <!-- <div class="gap-2"> -->
             <button id="clearFormCustomerButton" class="btn btn-primary fs-6" type="submit" style="width: 20%; padding: 12px;">Limpiar Campos</button>
@@ -67,5 +65,22 @@
       </div>
     </div>
   </div>
+  <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Clientes</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Cliente creado correctamente.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

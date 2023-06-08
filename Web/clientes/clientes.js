@@ -87,10 +87,10 @@ require([
           buttonClearClientes.addEventListener("click", (evt) => {
             //Obtener Elementos input del formulario por el nombre de la clase  
             let inputs = document.getElementsByClassName("form_field_clientes");
-            for(let i = 0; i < inputs.length-1; i++){
+            for(let i = 0; i < inputs.length; i++){
                 if(inputs[i].type != "submit"){
-                  if(inputs[i].value == null || inputs[i].value === ""){return;}
-                  inputs[i].value = "";
+                    if(inputs[i].value == null || inputs[i].value === ""){return;}
+                    inputs[i].value = "";
                 }
             }
           });
@@ -98,3 +98,4 @@ require([
       }
     });
   });
+  
