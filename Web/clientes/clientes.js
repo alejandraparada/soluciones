@@ -42,6 +42,9 @@ require([
         }, 'myTableNode');
         myFeatureTable.startup();
 
+        let id_cliente = 0;
+        let objectid = 0;
+
         myFeatureTable.on("load", function(evt){
             ////Querytask de cada Tabla/FeatureLayer////
             var queryTask =new QueryTask("https://services-eu1.arcgis.com/igW51C2bOj7D9cJ2/arcgis/rest/services/AuthenticatorModel/FeatureServer/0");
@@ -52,13 +55,7 @@ require([
             query.outFields =["ID_Cliente", "Nombre"];
 
             queryTask.execute(query, lang.hitch(this, function(results){
-                console.log(results)
-                var i= results.features.length-1;
-                var codCliente = results.features[i].attributes.ID_Cliente + 1
-                console.log("ultimocliente",codCliente)
-                
-                document.getElementById("Clientes_ID_Cliente").value = codCliente
-
+                id_cliente = results.features[results.features.length-1].attributes.ID_Cliente + 1;
             }));
           
             ////////////////////////// CREAR //////////////////////////
@@ -72,27 +69,14 @@ require([
                 };
                 //Obtener Elementos input del formulario por el nombre de la clase  
                 let inputs = document.getElementsByClassName("form_field_clientes");
-                for(let i = 1; i < inputs.length; i++){
-                    console.log("inputsLength",inputs.length)
+                for(let i = 0; i < inputs.length-1; i++){
                     if(inputs[i].type != "submit"){
-                        if(inputs[i].alt == "ID_Cliente"){
-                            queryTask.execute(query, lang.hitch(this, function(results){
-                                console.log(results)
-                                var i= results.features.length-1;
-                                var codCliente = results.features[i].attributes.ID_Cliente + 1
-                                console.log("ultimocliente",codCliente)
-                                
-                                document.getElementById("Clientes_ID_Cliente").value = codCliente
-                
-                            }));
-                        }
-                        if(inputs[i].value == null || inputs[i].value === ""){
-                        // alert("Es necesario que rellenes todos los campos");
-                        return;
-                        }
-                        addsClientes.attributes[inputs[i].alt] = inputs[i].value;
+                      if(inputs[i].value == null || inputs[i].value === ""){return;}
+                      addsClientes.attributes[inputs[i].alt] = inputs[i].value;
                     }
                 }
+                addsClientes.attributes["ID_Cliente"] = id_cliente;
+                id_cliente += 1;
                 myFeatureTable.featureLayer.applyEdits([addsClientes], null, null);
                 myFeatureTable.refresh();
             }); 
@@ -101,18 +85,14 @@ require([
           //Clientes - Limpiar Campos del Formulario
           let buttonClearClientes = document.getElementById("clearFormCustomerButton");
           buttonClearClientes.addEventListener("click", (evt) => {
-            myFeatureTable.featureLayer.fields.forEach(field => {
-                queryTask.execute(query, lang.hitch(this, function(results){
-                    console.log(results)
-                    var i= results.features.length-1;
-                    var codCliente = results.features[i].attributes.ID_Cliente + 1
-                    console.log("ultimocliente",codCliente)
-                    
-                    document.getElementById("Clientes_ID_Cliente").value = codCliente
-    
-                }));
-                document.getElementById(`Clientes_${field.name}`).value = ''
-            });
+            //Obtener Elementos input del formulario por el nombre de la clase  
+            let inputs = document.getElementsByClassName("form_field_clientes");
+            for(let i = 0; i < inputs.length-1; i++){
+                if(inputs[i].type != "submit"){
+                  if(inputs[i].value == null || inputs[i].value === ""){return;}
+                  inputs[i].value = "";
+                }
+            }
           });
         });
       }
