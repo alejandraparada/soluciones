@@ -42,6 +42,11 @@ require([
         }, 'myTableNode');
         myFeatureTable.startup();
 
+        let id_cliente = 0;
+        let id_despliegue = 0;
+        let id_solucion = 0;
+        let objectid = 0;
+
         myFeatureTable.on("load", function(evt){
           ////Querytask de cada Tabla/FeatureLayer////
           var queryTask =new QueryTask("https://services-eu1.arcgis.com/igW51C2bOj7D9cJ2/arcgis/rest/services/AuthenticatorModel/FeatureServer/0");
@@ -55,7 +60,6 @@ require([
           query.outFields =["ID_Cliente", "Nombre"];
 
           queryTask.execute(query, lang.hitch(this, function(results){
-            console.log(results)
             for (var i =0; i< results.features.length; i++){
               opt = document.createElement("option");
               opt.value= results.features[i].attributes.ID_Cliente;
@@ -71,14 +75,8 @@ require([
           query1.returnGeometry = false;
           query1.outFields =["ID_Despliegue"];
 
-          queryTask1.execute(query, lang.hitch(this, function(results){
-            console.log(results)
-            var i= results.features.length-1;
-            var codCliente = results.features[i].attributes.ID_Despliegue + 1
-            console.log("ultdespliegue",codCliente)
-            
-            document.getElementById("Despliegues_ID_Despliegue").value = codCliente
-
+          queryTask1.execute(query1, lang.hitch(this, function(results){
+            id_despliegue = results.features[results.features.length-1].attributes.ID_Despliegue + 1;
           }));
 
           var query3 = new Query();
@@ -98,7 +96,7 @@ require([
           }));
           
           ////////////////////////// CREAR //////////////////////////
-          //Clientes - Dar de alta nuevo Cliente 
+          //Despliegues - Dar de alta nuevo Despliegue 
           let buttonDespliegue = document.getElementById("addDeploymentButton");
           buttonDespliegue.addEventListener("click", (evt) => {
 
@@ -108,27 +106,16 @@ require([
             };
             //Obtener Elementos input del formulario por el nombre de la clase  
             let inputs = document.getElementsByClassName("form_field_despliegues");
-            for(let i = 1; i < inputs.length; i++){
-              console.log("inputsLength",inputs.length)
+            for(let i = 0; i < inputs.length; i++){
               if(inputs[i].type != "submit"){
-                if(inputs[i].alt == "ID_Despliegue"){
-                  queryTask1.execute(query1, lang.hitch(this, function(results){
-                    console.log(results)
-                    var i= results.features.length-1;
-                    var codCliente = results.features[i].attributes.ID_Despliegue + 1
-                    console.log("ultdespliegue",codCliente)
-                    
-                    document.getElementById("Despliegues_ID_Despliegue").value = codCliente
-      
-                  }));
-                }
-                if(inputs[i].value == null || inputs[i].value === ""){
-                  // alert("Es necesario que rellenes todos los campos");
-                  return;
-                }
+                if(inputs[i].value == null || inputs[i].value === ""){return}
                 addsDespliegue.attributes[inputs[i].alt] = inputs[i].value;
               }
             }
+            addsDespliegue.attributes["ID_Despliegue"] = id_despliegue;
+            addsDespliegue.attributes["ID_Cliente"] = document.getElementById("Despliegues_ID_Cliente").value;
+            addsDespliegue.attributes["ID_Solucion"] = document.getElementById("Despliegues_ID_Solucion").value;
+            id_despliegue += 1;
             myFeatureTable.featureLayer.applyEdits([addsDespliegue], null, null);
             myFeatureTable.refresh();
           }); 
@@ -137,18 +124,14 @@ require([
           //Clientes - Limpiar Campos del Formulario
           let buttonClearClientes = document.getElementById("clearFormDeploymentButton");
           buttonClearClientes.addEventListener("click", (evt) => {
-            myFeatureTable.featureLayer.fields.forEach(field => {
-                queryTask1.execute(query1, lang.hitch(this, function(results){
-                    console.log(results)
-                    var i= results.features.length-1;
-                    var codCliente = results.features[i].attributes.ID_Cliente + 1
-                    console.log("ultimocliente",codCliente)
-                    
-                    document.getElementById("Despliegues_ID_Despliegue").value = codCliente
-    
-                }));
-                document.getElementById(`Despliegues_${field.name}`).value = ''
-            });
+            //Obtener Elementos input del formulario por el nombre de la clase  
+            let inputs = document.getElementsByClassName("form_field_despliegues");
+            for(let i = 0; i < inputs.length-1; i++){
+              if(inputs[i].type != "submit"){
+                if(inputs[i].value == null || inputs[i].value === ""){return;}
+                inputs[i].value = "";
+              }
+            }
           });
         });
       }
