@@ -66,7 +66,6 @@ require([
               opt.innerHTML=results.features[i].attributes.Nombre;
               document.getElementById("Despliegues_ID_Cliente").add(opt);
             }
-  
           }));
 
           //Query para obtener id de despliegue
