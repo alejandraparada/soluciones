@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Authenticator | Gestión de Recursos</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.26/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.26/esri/css/esri.css">
+    <script src="https://js.arcgis.com/3.43/"></script>
+    <script src="recursosAdd.js"></script>
+    <link rel="stylesheet" href="clientes.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    </head>
+<body>
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <ul class="nav nav-pills">
+        <li class="nav-item" >
+          <a class="nav-link active fs-4"  aria-current="page" href="#">Añadir</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fs-4" href="clientesModificar.html">Modificar</a>
+        </li>
+      </ul>
+      <a class="navbar-brand" href="#">
+        <img src="images\home.png" alt="Logo" width="30" height="25" class="d-inline-block align-text-top">
+      </a>
+    </div>
+  </nav>
+  <div id="tittle">
+    <br><h3>Recursos</h3><br>
+  </div>
+  <div id="formClientes" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline'" style="width:60%; height:100%; display:block">
+    <div data-dojo-type="dijit/layout/ContentPane" region="center" data-dojo-props="splitter:true" style="height:90%; justify-content: center;">
+      <div id="form_cli" class="form">
+        <label for="Recursos_ID_Solucion" class="form-label">ID Solucion</label>
+        <select id="Recursos_ID_Solucion" class="form-select form_field_recursos" aria-label="Default select example" style="display: block;"></select>
+        <label for="Recursos_ID_Item" class="form-label">ID Item</label>
+        <input class="form_field_recursos" id="Recursos_ID_Item" placeholder="ID_Item" alt="ID_Item" type="text">
+        <label for="Recursos_Tipo" class="form-label">Recursos Tipo</label>
+        <select id="Recursos_Tipo" class="form-select form_field_recursos" aria-label="Default select example" style="display: block;">
+        <option value="0">FullHosted</option>
+        <option value="1">PartialHosted</option>
+        <option value="2">PartialReferenced</option>
+        <option value="3">FullReferenced</option>
+      </select>
+        <!-- <input class="form_field_recursos" id="Recursos_Tipo" placeholder="Tipo" alt="Tipo" type="text"> -->
+        <label for="Recursos_Nombre" class="form-label">Recursos Nombre</label>
+        <input class="form_field_recursos" id="Recursos_Nombre" placeholder="Nombre" alt="Nombre" type="text" >
+        <label for="Recursos_Requiere_Automatizacion" class="form-label">Requiere Automatizacion</label>
+        <select id="Recursos_Requiere_Automatizacion" class="form-select form_field_recursos" aria-label="Default select example" style="display: block;">
+          <option value="0">No</option>
+          <option value="1">Sí, global</option>
+          <option value="2">Sí, única por cliente</option>
+        </select>
+        <!-- <input class="form_field_recursos" id="Recursos_Requiere_Automatizacion" placeholder="Requiere_Automatizacion" alt="Requiere_Automatizacion" type="text"> -->
+        <label for="Recursos_Filtro_Atributo" class="form-label">Filtro Atributo</label>
+        <input class="form_field_recursos" id="Recursos_Filtro_Atributo" placeholder="Filtro_Atributo" alt="Filtro_Atributo" type="text">
+        <label for="Recursos_Path_GDB" class="form-label">Path GDB</label>
+        <input class="form_field_recursos" id="Recursos_Path_GDB" placeholder="Path_GDB" alt="Path_GDB" type="text">
+        <label for="Recursos_EsMunicipio" class="form-label">Es Municipio</label>
+        <input class="form_field_recursos" id="Recursos_EsMunicipio" placeholder="EsMunicipio" alt="EsMunicipio" type="text">
+      </div>
+      <div id="formButtons" class="container ">
+        <div class="row gap-2" style="justify-content: right;">
+          <p></p>
+          <!-- <div class="gap-2"> -->
+            <button id="addResourcesButton" class="btn btn-primary fs-6" type="submit" style="width: 20%; padding: 12px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Añadir Recurso</button>
+          <!-- </div> -->
+          <!-- <div class="gap-2"> -->
+            <button id="clearFormResourcesButton" class="btn btn-primary fs-6" type="submit" style="width: 20%; padding: 12px;">Limpiar Campos</button>
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Clientes</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Recurso creado correctamente.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
