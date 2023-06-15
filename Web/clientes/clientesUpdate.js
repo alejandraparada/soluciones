@@ -49,54 +49,12 @@ require([
             ////Querytask de cada Tabla/FeatureLayer////
             var queryTask =new QueryTask("https://services-eu1.arcgis.com/igW51C2bOj7D9cJ2/arcgis/rest/services/AuthenticatorModel/FeatureServer/0");
 
-            // //Query para obtener desplegable de clientes
-            // var query = new Query();
-            // query.where = "1 = 1";
-            // query.returnGeometry = false;
-            // query.outFields =["OBJECTID","ID_Cliente", "Nombre"];
-
-            // queryTask.execute(query, lang.hitch(this, function(results){
-            //     for (var i =0; i< results.features.length; i++){
-            //     opt = document.createElement("option");
-            //     opt.value= results.features[i].attributes.ID_Cliente;
-            //     opt.innerHTML=results.features[i].attributes.Nombre;
-            //     document.getElementById("Clientes_Nombre").add(opt);
-            //     }
-            //     id_cliente= document.getElementById("Clientes_Nombre").value
-            //     console.log("CLIENTE",id_cliente)
-            // }));
-          
-            // let nombreClientes = document.getElementById("Clientes_Nombre");
-            // nombreClientes.addEventListener("change", (evt) => {
-                
-            //     id_cliente= document.getElementById("Clientes_Nombre").value
-            //     console.log("CLIENTE2",id_cliente)
-                
-            //     var query1 = new Query();
-            //     query1.where = "ID_Cliente = "+ id_cliente;
-            //     query1.returnGeometry = false;
-            //     query1.outFields =["OBJECTID","ID_Cliente", "Nombre","URL_Destino","Usuario_Destino", "Password_Destino", "Usuario_Origen", "Password_Origen", "Codigo_Municipio", "Nombre_Provincia"];
-
-            //     queryTask.execute(query1, lang.hitch(this, function(results){
-            //         console.log("result",results)
-            //         objectid = results.features[0].attributes.OBJECTID
-            //         console.log("OBJ",objectid)
-            //         document.getElementById("Clientes_URL_Destino").value = results.features[0].attributes.URL_Destino;
-            //         document.getElementById("Clientes_Usuario_Destino").value = results.features[0].attributes.Usuario_Destino;
-            //         document.getElementById("Clientes_Password_Destino").value = results.features[0].attributes.Password_Destino;
-            //         document.getElementById("Clientes_Usuario_Origen").value = results.features[0].attributes.Usuario_Origen;
-            //         document.getElementById("Clientes_Password_Origen").value = results.features[0].attributes.Password_Origen;
-            //         document.getElementById("Clientes_Codigo_Municipio").value = results.features[0].attributes.Codigo_Municipio;
-            //         document.getElementById("Clientes_Nombre_Provincia").value = results.features[0].attributes.Nombre_Provincia;
-            //     }));
-            // });
-
             /////////////////////////REFRESH TABLE////////////////////
             //Clientes - Refresh table button
-            let buttonRefreshClientes = document.getElementById("refreshTableCustomerButton");
-            buttonRefreshClientes.addEventListener("click", (evt) => {
-              myFeatureTable.refresh();
-            });
+            // let buttonRefreshClientes = document.getElementById("refreshTableCustomerButton");
+            // buttonRefreshClientes.addEventListener("click", (evt) => {
+            //   myFeatureTable.refresh();
+            // });
 
             /////////////////////////MODIFICAR/////////////////////////
             //Clientes - Modificar cliente existente
