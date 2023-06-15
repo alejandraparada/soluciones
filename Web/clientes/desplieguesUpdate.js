@@ -96,10 +96,10 @@ require([
           
           /////////////////////////REFRESH TABLE////////////////////
           //Despliegues - Refresh table button
-          let buttonRefreshDespliegues = document.getElementById("refreshTableDeploymentButton");
-          buttonRefreshDespliegues.addEventListener("click", (evt) => {
-            myFeatureTable.refresh();
-          });
+          // let buttonRefreshDespliegues = document.getElementById("refreshTableDeploymentButton");
+          // buttonRefreshDespliegues.addEventListener("click", (evt) => {
+          //   myFeatureTable.refresh();
+          // });
 
           /////////////////////////MODIFICAR/////////////////////////
           //Despliegues - Modificar despliegue existente
