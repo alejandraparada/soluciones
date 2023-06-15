@@ -34,6 +34,6 @@ input[type=submit], button {
     border-radius: 4px;
     cursor: pointer;
 }
-#formClientes , #formDespliegues{
+#formClientes , #formRecursos, #formDespliegues , #formSoluciones, #formWebmap{
     margin-left: 20%;
 }
