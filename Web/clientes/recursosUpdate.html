@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://js.arcgis.com/3.26/dijit/themes/claro/claro.css">
     <link rel="stylesheet" href="https://js.arcgis.com/3.26/esri/css/esri.css">
     <script src="https://js.arcgis.com/3.43/"></script>
-    <script src="recursosAdd.js"></script>
+    <script src="recursosUpdate.js"></script>
     <link rel="stylesheet" href="clientes.css">
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -48,15 +48,15 @@
       </ul>
     </div>
     <!-- Ventana Formulario -->
-    <div class="col" style="padding-left: 0px;">
+    <div class="col" style="padding-left: 0px; height: 100%;">
       <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
           <ul class="nav nav-pills">
             <li class="nav-item" >
-              <a class="nav-link active fs-4"  aria-current="page" href="recursosAdd.html">Añadir</a>
+              <a class="nav-link  fs-4"  aria-current="page" href="recursosAdd.html">Añadir</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link fs-4" href="recursosUpdate.html">Modificar</a>
+              <a class="nav-link active fs-4" href="recursosUpdate.html">Modificar</a>
             </li>
           </ul>
           <a class="navbar-brand" href="#">
@@ -67,7 +67,7 @@
       <div id="tittle">
         <br><h3>Recursos</h3><br>
       </div>
-      <div id="formClientes" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline'" style="width:60%; height:100%; display:block">
+      <div id="formRecursos" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline'" style="width:60%; height:100%; display:block">
         <div data-dojo-type="dijit/layout/ContentPane" region="center" data-dojo-props="splitter:true" style="height:90%; justify-content: center;">
           <div id="form_cli" class="form">
             <label for="Recursos_ID_Solucion" class="form-label">Solución</label>
@@ -91,14 +91,14 @@
           <div id="formButtons" class="container ">
             <div class="row gap-2" style="justify-content: right;">
               <p></p>
-              <!-- <div class="gap-2"> -->
-                <button id="addResourcesButton" class="btn btn-primary fs-6" type="submit" style="width: 20%; padding: 12px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Añadir Recurso</button>
-              <!-- </div> -->
-              <!-- <div class="gap-2"> -->
-                <button id="clearFormResourcesButton" class="btn btn-primary fs-6" type="submit" style="width: 20%; padding: 12px;">Limpiar Campos</button>
-              <!-- </div> -->
+              <button id="deleteResourcesButtonForm" class="btn btn-secondary fs-6" type="submit" style="width: 20%; padding: 12px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">Eliminar</button>
+              <!-- <button id="refreshTableResourcesButton" class="btn btn-primary fs-6" type="submit" style="width: 20%; padding: 12px;">Actualizar Tabla</button> -->
+              <button id="updateResourcesButton" class="btn btn-primary fs-6" type="submit" style="width: 20%; padding: 12px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Modificar</button>
             </div>
           </div>
+        </div>
+        <div id="bot" data-dojo-type="dijit/layout/ContentPane" region="bottom" data-dojo-props="splitter:true" style="width:100%;height:50%">
+          <div id="myTableNode"></div>
         </div>
       </div>
       <!-- Modal -->
@@ -110,10 +110,38 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              Recurso creado correctamente.
+              Recurso modificado correctamente.
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+              <div class="row">
+                <div class="col">
+                  <button type="button" class="btn btn-primary" style="height: 100%; padding: 12px;" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Delete-->
+      <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Recursos</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Estas seguro que deseas eliminar este Recurso?
+            </div>
+            <div class="modal-footer">
+              <div class="row">
+                <div class="col">
+                  <button type="button" class="btn btn-secondary"  style="height: 100%; padding: 12px;"data-bs-dismiss="modal">Cancelar</button>
+                </div>
+                <div class="col">
+                  <button id= "deleteResourcesButton" type="button" style="height: 100%; padding: 12px;" class="btn btn-primary" data-bs-dismiss="modal">Sí, estoy seguro</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

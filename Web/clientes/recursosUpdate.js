@@ -81,33 +81,13 @@ require([
             }
   
           }));
-          
-          ////////////////////////// CREAR //////////////////////////
-          //Recursos - Dar de alta nuevo Recurso 
-          let buttonRecurso = document.getElementById("addResourcesButton");
-          buttonRecurso.addEventListener("click", (evt) => {
-
-            let addsRecurso = {
-              attributes: {
-              }
-            };
-            //Obtener Elementos input del formulario por el nombre de la clase  
-            let inputs = document.getElementsByClassName("form_field_recursos");
-            for(let i = 0; i < inputs.length; i++){
-              if(inputs[i].type != "submit"){
-                if(inputs[i].value == null || inputs[i].value === ""){return}
-                addsRecurso.attributes[inputs[i].alt] = inputs[i].value;
-              }
-            }
-            addsRecurso.attributes["ID_Recurso"] = id_recurso;
-            addsRecurso.attributes["ID_Solucion"] = document.getElementById("Recursos_ID_Solucion").value;
-            id_recurso += 1;
-            myFeatureTable.featureLayer.applyEdits([addsRecurso], null, null);
-            myFeatureTable.refresh();
-          }); 
 
           ///////////////OBTENER DOMINIOS DE FEATURE LAYER//////////////
           myFeatureLayer.fields.forEach(field => {
+            if(!field.nullable){
+              console.log("permitenull",field.name, field.nullable)
+            }
+            console.log("null",field.name, field.nullable)
             if (field.name == "Tipo"){
               let domain = myFeatureLayer.getDomain("Tipo");
               // console.log("domain", domain.name)
@@ -134,19 +114,102 @@ require([
             }
           });
 
-          ///////////////////////LIMPIAR CAMPOS//////////////////////////
-          //Clientes - Limpiar Campos del Formulario
-          let buttonClearRecursos = document.getElementById("clearFormResourcesButton");
-          buttonClearRecursos.addEventListener("click", (evt) => {
-            //Obtener Elementos input del formulario por el nombre de la clase  
-            let inputs = document.getElementsByClassName("form_field_recursos");
-            for(let i = 0; i < inputs.length-1; i++){
+          /////////////////////////REFRESH TABLE////////////////////
+          //Recursos - Refresh table button
+          // let buttonRefreshDespliegues = document.getElementById("refreshTableResourcesButton");
+          // buttonRefreshDespliegues.addEventListener("click", (evt) => {
+          //   myFeatureTable.refresh();
+          // });
+
+          /////////////////////////MODIFICAR/////////////////////////
+          //Recursos - Modificar recurso existente
+          let buttonUpdateResources = document.getElementById("updateResourcesButton");
+          buttonUpdateResources.addEventListener("click", (evt) => {
+            
+
+          var updatesRecursos = {
+            attributes: {},
+            geometry: null
+          };
+              
+          var inputs = document.getElementsByClassName("form_field_recursos");
+          for(let i = 0; i < inputs.length; i++){
+            if(inputs[i].type != "submit"){
+              if(inputs[i].value == null || inputs[i].value === ""){inputs[i].value == ""}
+              updatesRecursos.attributes[inputs[i].alt] = inputs[i].value;
+            }
+          }
+          updatesRecursos.attributes["OBJECTID"] = objectid;
+          updatesRecursos.attributes["ID_Solucion"] = document.getElementById("Recursos_ID_Solucion").value;
+          updatesRecursos.attributes["Tipo"] = document.getElementById("Recursos_Tipo").value;
+          updatesRecursos.attributes["Requiere_Automatizacion"] = document.getElementById("Recursos_Requiere_Automatizacion").value;
+
+          myFeatureTable.featureLayer.applyEdits(null, [updatesRecursos], null, function(addResults, updateResults, deleteResults) {
+            console.log("Edición aplicada correctamente");
+            }, function(error) {
+                console.error("Error al aplicar la edición: ", error);
+            });
+            
+
+            myFeatureTable.refresh();
+          });
+
+          //////////////////////SELECCIONAR DESDE TABLA//////////////////////
+          //Recursos - Seleccionar recurso y mostrar en formulario
+          myFeatureTable.on("row-select", function(evt){
+            myFeatureTable.featureLayer.fields.forEach(field => {
+              var data = evt.rows[0].data
+              for(let i = 1; i < Object.keys(data).length; i++){
+                if(Object.keys(data)[i].endsWith("ID_Recurso")){
+                  id_recurso= Object.values(data)[i]
+                  console.log("DESPLIEGUE2",id_recurso)
+                  
+                  var queryA = new Query();
+                  queryA.where = "ID_Recurso = "+ id_recurso;
+                  queryA.returnGeometry = false;
+                  queryA.outFields =["OBJECTID","ID_Recurso"];
+
+                  queryTask2.execute(queryA, lang.hitch(this, function(results){
+                    objectid = results.features[0].attributes.OBJECTID
+                    console.log("OBJ",objectid)
+                  }));
+
+                }else if(Object.keys(data)[i].endsWith(field.name)){
+                  document.getElementById(`Recursos_${field.name}`).value = Object.values(data)[i]
+                  console.log("data[]",Object.values(data)[i])
+                }
+              }
+            });
+          });
+
+          ////////////////////////ELIMINAR///////////////////////
+          //Recursos - Elimminar recurso existente
+          let buttonDeleteRecurso = document.getElementById("deleteResourcesButton");
+          buttonDeleteRecurso.addEventListener("click", (evt) => {
+
+            let deletesRecurso = {
+              attributes: {},
+              geometry: null
+            };
+              
+            let inputs = document.getElementsByClassName("form_field_clientes");
+            for(let i = 0; i < inputs.length; i++){
               if(inputs[i].type != "submit"){
-                if(inputs[i].value == null || inputs[i].value === ""){return;}
-                inputs[i].value = "";
+                if(inputs[i].value == null || inputs[i].value === ""){return}
+                deletesRecurso.attributes[inputs[i].alt] = inputs[i].value;
               }
             }
+            deletesRecurso.attributes["OBJECTID"] = objectid;
+
+            myFeatureTable.featureLayer.applyEdits(null, null, [deletesRecurso], function(addResults, updateResults, deleteResults) {
+              console.log("Cliente eliminado correctamente");
+            }, function(error) {
+              console.error("Error al eliminar cliente: ", error);
+            });
+
+            myFeatureTable.refresh();
           });
+
         });
       }
     });
