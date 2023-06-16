@@ -69,7 +69,7 @@ require([
                 };
                 //Obtener Elementos input del formulario por el nombre de la clase  
                 let inputs = document.getElementsByClassName("form_field_clientes");
-                for(let i = 0; i < inputs.length-1; i++){
+                for(let i = 0; i < inputs.length; i++){
                     if(inputs[i].type != "submit"){
                       if(inputs[i].value == null || inputs[i].value === ""){return;}
                       addsClientes.attributes[inputs[i].alt] = inputs[i].value;

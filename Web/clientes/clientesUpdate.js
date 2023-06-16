@@ -69,7 +69,7 @@ require([
             var inputs = document.getElementsByClassName("form_field_clientes");
             for(let i = 0; i < inputs.length; i++){
                 if(inputs[i].type != "submit"){
-                    if(inputs[i].value == null || inputs[i].value === ""){return}
+                    if(inputs[i].value == null || inputs[i].value === ""){inputs[i].value == ""}
                     updatesClientes.attributes[inputs[i].alt] = inputs[i].value;
                 }
             }
