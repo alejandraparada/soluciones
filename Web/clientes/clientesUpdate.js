@@ -49,12 +49,12 @@ require([
             ////Querytask de cada Tabla/FeatureLayer////
             var queryTask =new QueryTask("https://services-eu1.arcgis.com/igW51C2bOj7D9cJ2/arcgis/rest/services/AuthenticatorModel/FeatureServer/0");
 
-            /////////////////////////REFRESH TABLE////////////////////
-            //Clientes - Refresh table button
-            // let buttonRefreshClientes = document.getElementById("refreshTableCustomerButton");
-            // buttonRefreshClientes.addEventListener("click", (evt) => {
-            //   myFeatureTable.refresh();
-            // });
+            ///////////////////////REFRESH TABLE////////////////////
+            // Clientes - Refresh table button
+            let buttonRefreshClientes = document.getElementById("refreshTableCustomerButton");
+            buttonRefreshClientes.addEventListener("click", (evt) => {
+              myFeatureTable.refresh();
+            });
 
             /////////////////////////MODIFICAR/////////////////////////
             //Clientes - Modificar cliente existente
