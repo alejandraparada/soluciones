@@ -73,10 +73,10 @@ require([
           
           /////////////////////////REFRESH TABLE////////////////////
           //Webmaps - Refresh table button
-          // let buttonRefreshWebmap = document.getElementById("refreshTableWebmapButton");
-          // buttonRefreshWebmap.addEventListener("click", (evt) => {
-          //   myFeatureTable.refresh();
-          // });
+          let buttonRefreshWebmap = document.getElementById("refreshTableWebmapButton");
+          buttonRefreshWebmap.addEventListener("click", (evt) => {
+            myFeatureTable.refresh();
+          });
 
           /////////////////////////MODIFICAR/////////////////////////
           //Webmaps - Modificar webmap existente

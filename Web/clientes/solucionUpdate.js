@@ -67,10 +67,10 @@ require([
           
           /////////////////////////REFRESH TABLE////////////////////
           //Despliegues - Refresh table button
-          // let buttonRefreshSoluciones = document.getElementById("refreshTableSolutionButton");
-          // buttonRefreshSoluciones.addEventListener("click", (evt) => {
-          //   myFeatureTable.refresh();
-          // });
+          let buttonRefreshSoluciones = document.getElementById("refreshTableSolutionButton");
+          buttonRefreshSoluciones.addEventListener("click", (evt) => {
+            myFeatureTable.refresh();
+          });
 
           /////////////////////////MODIFICAR/////////////////////////
           //Soluciones - Modificar solucion existente

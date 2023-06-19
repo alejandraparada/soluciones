@@ -116,10 +116,10 @@ require([
 
           /////////////////////////REFRESH TABLE////////////////////
           //Recursos - Refresh table button
-          // let buttonRefreshDespliegues = document.getElementById("refreshTableResourcesButton");
-          // buttonRefreshDespliegues.addEventListener("click", (evt) => {
-          //   myFeatureTable.refresh();
-          // });
+          let buttonRefreshDespliegues = document.getElementById("refreshTableResourcesButton");
+          buttonRefreshDespliegues.addEventListener("click", (evt) => {
+            myFeatureTable.refresh();
+          });
 
           /////////////////////////MODIFICAR/////////////////////////
           //Recursos - Modificar recurso existente
