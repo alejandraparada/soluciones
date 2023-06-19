@@ -137,7 +137,6 @@ require([
               for(let i = 1; i < Object.keys(data).length; i++){
                 if(Object.keys(data)[i].endsWith("ID_Despliegue")){
                   id_despliegue= Object.values(data)[i]
-                  console.log("DESPLIEGUE2",id_despliegue)
                   
                   var queryA = new Query();
                   queryA.where = "ID_Despliegue = "+ id_despliegue;
@@ -146,12 +145,17 @@ require([
 
                   queryTask1.execute(queryA, lang.hitch(this, function(results){
                     objectid = results.features[0].attributes.OBJECTID
-                    console.log("OBJ",objectid)
                   }));
 
                 }else if(Object.keys(data)[i].endsWith(field.name)){
-                  document.getElementById(`Despliegues_${field.name}`).value = Object.values(data)[i]
-                  console.log("data[]",Object.values(data)[i])
+                  if (field.name.startsWith("Fecha")){
+                    let fecha = new Date(Object.values(data)[i]);
+                    document.getElementById(`Despliegues_${field.name}`).value = fecha.toISOString().substr(0, 10);
+                    console.log("dfech",fecha.toISOString().substr(0, 10))
+                  }
+                  else{
+                    document.getElementById(`Despliegues_${field.name}`).value = Object.values(data)[i];
+                  }
                 }
               }
             });
