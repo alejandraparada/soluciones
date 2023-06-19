@@ -131,31 +131,31 @@ require([
           
           ////////////////////////ELIMINAR///////////////////////
           //Cliente - Elimminar cliente existente
-          let buttonDeleteCliente = document.getElementById("deleteCustomerButton");
-          buttonDeleteCliente.addEventListener("click", (evt) => {
+          // let buttonDeleteCliente = document.getElementById("deleteCustomerButton");
+          // buttonDeleteCliente.addEventListener("click", (evt) => {
 
-            let deletesCliente = {
-              attributes: {},
-              geometry: null
-            };
+          //   let deletesCliente = {
+          //     attributes: {},
+          //     geometry: null
+          //   };
               
-            let inputs = document.getElementsByClassName("form_field_clientes");
-            for(let i = 0; i < inputs.length; i++){
-              if(inputs[i].type != "submit"){
-                if(inputs[i].value == null || inputs[i].value === ""){return}
-                deletesCliente.attributes[inputs[i].alt] = inputs[i].value;
-              }
-            }
-            deletesCliente.attributes["OBJECTID"] = objectid;
+          //   let inputs = document.getElementsByClassName("form_field_clientes");
+          //   for(let i = 0; i < inputs.length; i++){
+          //     if(inputs[i].type != "submit"){
+          //       if(inputs[i].value == null || inputs[i].value === ""){return}
+          //       deletesCliente.attributes[inputs[i].alt] = inputs[i].value;
+          //     }
+          //   }
+          //   deletesCliente.attributes["OBJECTID"] = objectid;
 
-            myFeatureTable.featureLayer.applyEdits(null, null, [deletesCliente], function(addResults, updateResults, deleteResults) {
-              console.log("Cliente eliminado correctamente");
-            }, function(error) {
-              console.error("Error al eliminar cliente: ", error);
-            });
+          //   myFeatureTable.featureLayer.applyEdits(null, null, [deletesCliente], function(addResults, updateResults, deleteResults) {
+          //     console.log("Cliente eliminado correctamente");
+          //   }, function(error) {
+          //     console.error("Error al eliminar cliente: ", error);
+          //   });
 
-            myFeatureTable.refresh();
-          });
+          //   myFeatureTable.refresh();
+          // });
 
         });
       }
