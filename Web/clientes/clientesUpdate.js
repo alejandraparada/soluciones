@@ -85,22 +85,7 @@ require([
 
             myFeatureTable.refresh();
           });
-
           
-
-          // ///////////////////////LIMPIAR CAMPOS//////////////////////////
-          // //Clientes - Limpiar Campos del Formulario
-          // let buttonClearClientes = document.getElementById("clearFormCustomerButton");
-          // buttonClearClientes.addEventListener("click", (evt) => {
-          //   //Obtener Elementos input del formulario por el nombre de la clase  
-          //   let inputs = document.getElementsByClassName("form_field_clientes");
-          //   for(let i = 0; i < inputs.length; i++){
-          //       if(inputs[i].type != "submit"){
-          //           if(inputs[i].value == null || inputs[i].value === ""){return;}
-          //           inputs[i].value = "";
-          //       }
-          //   }
-          // });
 
           //////////////////////SELECCIONAR DESDE TABLA//////////////////////
           //Clientes - Seleccionar cliente y mostrar en formulario

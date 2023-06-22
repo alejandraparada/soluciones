@@ -43,7 +43,6 @@ require([
         myFeatureTable.startup();
 
         let id_cliente = 0;
-        let objectid = 0;
 
         myFeatureTable.on("load", function(evt){
             ////Querytask de cada Tabla/FeatureLayer////

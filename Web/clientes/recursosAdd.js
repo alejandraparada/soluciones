@@ -42,15 +42,10 @@ require([
         }, 'myTableNode');
         myFeatureTable.startup();
 
-        let id_cliente = 0;
-        let id_despliegue = 0;
         let id_recurso = 0;
-        let id_solucion = 0;
-        let objectid = 0;
 
         myFeatureTable.on("load", function(evt){
           ////Querytask de cada Tabla/FeatureLayer////
-          var queryTask =new QueryTask("https://services-eu1.arcgis.com/igW51C2bOj7D9cJ2/arcgis/rest/services/AuthenticatorModel/FeatureServer/0");
           var queryTask2 =new QueryTask("https://services-eu1.arcgis.com/igW51C2bOj7D9cJ2/arcgis/rest/services/AuthenticatorModel/FeatureServer/2");
           var queryTask3 =new QueryTask("https://services-eu1.arcgis.com/igW51C2bOj7D9cJ2/arcgis/rest/services/AuthenticatorModel/FeatureServer/3");
 
