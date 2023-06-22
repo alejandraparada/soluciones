@@ -46,7 +46,7 @@ require([
         let id_despliegue = 0;
         let id_recurso = 0;
         let id_solucion = 0;
-        let id_app = 0;
+        let id_app = 1;
         let objectid = 0;
 
         myFeatureTable.on("load", function(evt){
@@ -103,26 +103,27 @@ require([
             }
             addsApp.attributes["ID_App"] = id_app;
             addsApp.attributes["Nombre"] = document.getElementById("App_Nombre").value;
+            addsApp.attributes["ID_Recurso"] = document.getElementById("App_ID_Recurso").value;
             id_app += 1;
             myFeatureTable.featureLayer.applyEdits([addsApp], null, null);
             myFeatureTable.refresh();
           }); 
 
           ///////////////OBTENER DOMINIOS DE FEATURE LAYER//////////////
-          // myFeatureLayer.fields.forEach(field => {
-          //   if (field.name == "Tipo"){
-          //     let domain = myFeatureLayer.getDomain("Tipo");
-          //     // console.log("domain", domain.name)
-          //     if(domain && domain.type == "codedValue"){
-          //       domain.codedValues.forEach(codedValue => {
-          //         opt = document.createElement("option");
-          //         opt.value= codedValue.code;
-          //         opt.innerHTML=codedValue.name;
-          //         document.getElementById("App_Tipo").add(opt);
-          //       });
-          //     }
-          //   }
-          // });
+          myFeatureLayer.fields.forEach(field => {
+            if (field.name == "Tipo"){
+              let domain = myFeatureLayer.getDomain("Tipo");
+              // console.log("domain", domain.name)
+              if(domain && domain.type == "codedValue"){
+                domain.codedValues.forEach(codedValue => {
+                  opt = document.createElement("option");
+                  opt.value= codedValue.code;
+                  opt.innerHTML=codedValue.name;
+                  document.getElementById("App_Tipo").add(opt);
+                });
+              }
+            }
+          });
 
 
           ///////////////////////LIMPIAR CAMPOS//////////////////////////

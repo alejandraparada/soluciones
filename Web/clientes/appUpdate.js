@@ -84,6 +84,26 @@ require([
   
           }));
 
+          ///////////////OBTENER DOMINIOS DE FEATURE LAYER//////////////
+          myFeatureLayer.fields.forEach(field => {
+            if(!field.nullable){
+              console.log("permitenull",field.name, field.nullable)
+            }
+            console.log("null",field.name, field.nullable)
+            if (field.name == "Tipo"){
+              let domain = myFeatureLayer.getDomain("Tipo");
+              // console.log("domain", domain.name)
+              if(domain && domain.type == "codedValue"){
+                domain.codedValues.forEach(codedValue => {
+                  opt = document.createElement("option");
+                  opt.value= codedValue.code;
+                  opt.innerHTML=codedValue.name;
+                  document.getElementById("App_Tipo").add(opt);
+                });
+              }
+            }
+          });
+
           /////////////////////////REFRESH TABLE////////////////////
           //App - Refresh table button
           let buttonRefreshApp = document.getElementById("refreshTableAppButton");
