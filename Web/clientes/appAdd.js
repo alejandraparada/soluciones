@@ -42,7 +42,7 @@ require([
         }, 'myTableNode');
         myFeatureTable.startup();
 
-        let id_app = 1;
+        let id_app = 0;
 
         myFeatureTable.on("load", function(evt){
           ////Querytask de cada Tabla/FeatureLayer////
