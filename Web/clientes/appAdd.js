@@ -103,6 +103,7 @@ require([
             }
             addsApp.attributes["ID_App"] = id_app;
             addsApp.attributes["Nombre"] = document.getElementById("App_Nombre").value;
+            addsApp.attributes["Tipo"] = document.getElementById("App_Tipo").value;
             addsApp.attributes["ID_Recurso"] = document.getElementById("App_ID_Recurso").value;
             id_app += 1;
             myFeatureTable.featureLayer.applyEdits([addsApp], null, null);
